@@ -19,8 +19,7 @@
 <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
 	<div class="relative">
 		<img
-			src={currentImage.imageUrl}
-			alt={currentImage.description}
+			src={currentImage.imageUrls}
 			class="rounded-lg max-h-[80vh] mx-auto"
 		/>
 

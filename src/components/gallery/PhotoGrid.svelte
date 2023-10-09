@@ -31,12 +31,12 @@
 	{columnSize}
 	{columnSizeRatio}
 >
-	{#each items as item}
+	{#each items || [] as item}
 		<div
-			class="shadow-lg rounded-lg overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105"
+			class="shadow-lg rounded-lg overflow-hidden cursor-pointer transition-transform duration-300 max-w-md hover:scale-105"
 			on:click={() => setOpen(item)}
 		>
-			<img src={item.imageUrl} alt={item.description} />
+			<img src={item.imageUrls}/>
 		</div>
 	{/each}
 </MasonryGrid>

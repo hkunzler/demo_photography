@@ -9,7 +9,6 @@ const config = {
 			fallback: null
 		})
 	},
-
 	preprocess: [
 		preprocess({
 			postcss: true

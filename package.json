@@ -3,6 +3,8 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
+		"sanity_dev": "sanity dev",
+		"sanity_start": "sanity start",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
@@ -27,6 +29,8 @@
 	"type": "module",
 	"dependencies": {
 		"@egjs/svelte-grid": "^1.14.2",
+		"@sanity/cli": "^3.17.0",
+		"@sanity/client": "^6.4.12",
 		"@sveltejs/adapter-static": "^2.0.3",
 		"autoprefixer": "^10.4.16",
 		"svelte-preprocess": "^5.0.4",

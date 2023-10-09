@@ -3,7 +3,15 @@
 
 	const dispatch = createEventDispatcher();
 	export let selectedCategory;
-	export let categories;
+	export let galleryData;
+
+	let allCategories = [];
+	let categories = [];
+
+	$: if (galleryData) {
+		allCategories = galleryData.map(photo => photo.category).flat().filter(Boolean);
+		categories = ['All', ...new Set(allCategories)];
+	}
 
 	function setCategory(category) {
 		selectedCategory = category;
