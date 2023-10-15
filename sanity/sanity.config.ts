@@ -7,10 +7,10 @@ export default defineConfig({
   name: 'default',
   title: 'photography_template',
 
-  projectId: 'u1bm8ijp',
-  dataset: 'production',
+  projectId: process.env.VITE_SANITY_STUDIO_PROJECT_ID,
+  dataset: process.env.VITE_SANITY_STUDIO_DATASET,
 
-  plugins: [deskTool(), visionTool()],
+  plugins: [deskTool(undefined), visionTool()],
 
   schema: {
     types: schemaTypes,

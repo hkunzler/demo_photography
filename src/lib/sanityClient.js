@@ -1,8 +1,8 @@
-import {createClient} from '@sanity/client';
+import { createClient } from '@sanity/client';
 
 export default createClient({
-  projectId: 'u1bm8ijp',
-  dataset: 'production',
-  useCdn: true,
-  apiVersion: '2023-10-08'
+	projectId: process.env.VITE_SANITY_STUDIO_PROJECT_ID,
+	dataset: process.env.VITE_SANITY_STUDIO_DATASET,
+	useCdn: true,
+	apiVersion: process.env.VITE_SANITY_STUDIO_API_VERSION
 });

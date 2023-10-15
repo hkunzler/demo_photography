@@ -18,10 +18,7 @@
 
 <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
 	<div class="relative">
-		<img
-			src={currentImage.imageUrls}
-			class="rounded-lg max-h-[80vh] mx-auto"
-		/>
+		<img src={currentImage.imageUrl + '?w=700&fm=webp'} class="rounded-lg max-h-[80vh] mx-auto" />
 
 		<button
 			on:click={() => dispatch('openChange', null)}

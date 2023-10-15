@@ -1,6 +1,6 @@
 <script>
 	import { onMount, afterUpdate } from 'svelte';
-	import client from "$lib/sanityClient.js";
+	import client from '$lib/index.js';
 
 	let currentIndex = 1;
 	let containerWidth = 0;
@@ -33,12 +33,13 @@
 	let title;
 	let imageUrls = [];
 	onMount(async () => {
-		updateContainerWidth()
+		updateContainerWidth();
 
-
-		const fetchedData = await client.fetch('*[_type == "carousel"]{ name, "imageUrls": slides[].image.asset->url }[0]');
+		const fetchedData = await client.fetch(
+			'*[_type == "carousel"]{ name, "imageUrls": slides[].image.asset->url }[0]'
+		);
 		let carouselData = { ...fetchedData };
-title = carouselData?.name;
+		title = carouselData?.name;
 		imageUrls = carouselData?.imageUrls || [];
 	});
 	afterUpdate(updateContainerWidth);
@@ -56,39 +57,53 @@ title = carouselData?.name;
 </script>
 
 <div class="carousel-container text-center relative overflow-hidden mx-auto py-8">
-	<h2 class="mb-8">{title}</h2>
-	<div
-		class="flex transition-transform duration-300 {isLooping ? 'bounce-transition' : ''}"
-		style="transform: translateX({offset}px)"
-	>
-		{#each imageUrls as image, index}
-			<img
-				src={image}
-				alt={`Carousel Image ${index + 1}`}
-				class={`w-1/3 ${
-					index === currentIndex
-						? 'opacity-100'
-						: index === currentIndex - 1 || index === currentIndex + 1
-						? 'opacity-50'
-						: 'opacity-0'
-				}`}
-			/>
-		{/each}
-	</div>
+	{#if !title || !imageUrls}
+		<div class="lds-roller">
+			<div />
+			<div />
+			<div />
+			<div />
+			<div />
+			<div />
+			<div />
+			<div />
+		</div>
+	{:else}
+		<h2 class="mb-8">{title}</h2>
+		<div
+			class="flex transition-transform duration-300 {isLooping ? 'bounce-transition' : ''}"
+			style="transform: translateX({offset}px)"
+		>
+			{#each imageUrls as image, index}
+				<img
+					loading="lazy"
+					src={image + '?w=700&fm=webp'}
+					alt={`Carousel Image ${index + 1}`}
+					class={`w-1/3 ${
+						index === currentIndex
+							? 'opacity-100'
+							: index === currentIndex - 1 || index === currentIndex + 1
+							? 'opacity-50'
+							: 'opacity-0'
+					}`}
+				/>
+			{/each}
+		</div>
 
-	<button
-		on:click={showPrev}
-		class="absolute top-1/2 left-0 ml-4 p-2 bg-black bg-opacity-50 text-white z-10"
-	>
-		Prev
-	</button>
+		<button
+			on:click={showPrev}
+			class="absolute top-1/2 left-0 ml-4 p-2 bg-black bg-opacity-50 text-white z-10"
+		>
+			Prev
+		</button>
 
-	<button
-		on:click={showNext}
-		class="absolute top-1/2 right-0 mr-4 p-2 bg-black bg-opacity-50 text-white z-10"
-	>
-		Next
-	</button>
+		<button
+			on:click={showNext}
+			class="absolute top-1/2 right-0 mr-4 p-2 bg-black bg-opacity-50 text-white z-10"
+		>
+			Next
+		</button>
+	{/if}
 </div>
 
 <style>

@@ -5,7 +5,6 @@
 	const dispatch = createEventDispatcher();
 	export let items;
 	export let currentImage;
-
 	let grid;
 
 	const gap = 5;
@@ -19,9 +18,15 @@
 		currentImage = image;
 		dispatch('openChange', currentImage);
 	}
+	let images;
+
+	$: {
+		images = items;
+	}
 </script>
 
 <MasonryGrid
+	loading="lazy"
 	bind:this={grid}
 	class="container"
 	{defaultDirection}
@@ -31,12 +36,12 @@
 	{columnSize}
 	{columnSizeRatio}
 >
-	{#each items || [] as item}
+	{#each images || [] as item}
 		<div
 			class="shadow-lg rounded-lg overflow-hidden cursor-pointer transition-transform duration-300 max-w-md hover:scale-105"
 			on:click={() => setOpen(item)}
 		>
-			<img src={item.imageUrls}/>
+			<img src={item?.imageUrl + '?w=700&fm=webp'} />
 		</div>
 	{/each}
 </MasonryGrid>

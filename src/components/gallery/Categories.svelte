@@ -3,14 +3,10 @@
 
 	const dispatch = createEventDispatcher();
 	export let selectedCategory;
-	export let galleryData;
+	export let categories;
 
-	let allCategories = [];
-	let categories = [];
-
-	$: if (galleryData) {
-		allCategories = galleryData.map(photo => photo.category).flat().filter(Boolean);
-		categories = ['All', ...new Set(allCategories)];
+	$: if (categories) {
+		categories = ['All', ...new Set(categories)];
 	}
 
 	function setCategory(category) {
@@ -20,7 +16,7 @@
 </script>
 
 <div class="mb-6 flex justify-center">
-	{#each categories as category}
+	{#each categories || [] as category}
 		<button
 			on:click={() => setCategory(category)}
 			class="px-4 py-2 rounded mr-2 text-sm {selectedCategory === category

@@ -1,5 +1,9 @@
 <script>
 	export let item;
+	const dateObj = new Date(item.date);
+	const formattedDate = `${dateObj.getFullYear()}-${(dateObj.getMonth() + 1)
+		.toString()
+		.padStart(2, '0')}-${dateObj.getDate().toString().padStart(2, '0')}`;
 </script>
 
 <div
@@ -13,10 +17,11 @@
 				<span class="inline-block mr-2">
 					<img src="/calendarIcon.svg" role="none" alt="Calendar Icon" />
 				</span>
-				<!--{item.date}-->
+				{formattedDate}
 			</p>
-<!--			<p class="mb-4">{item.description}</p>-->
+			<p class="mb-4">{item.description}</p>
 		</div>
-		<a href={item?.url} class="text-primary hover:underline hover:text-secondary">View</a>
+		<a href={item?.url} class="text-primary hover:underline hover:text-secondary">{item.ctaLabel}</a
+		>
 	</div>
 </div>
