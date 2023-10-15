@@ -3,7 +3,7 @@ import adapter from '@sveltejs/adapter-netlify';
 
 const config = {
 	kit: {
-		adapter: adapter({k
+		adapter: adapter({
 			pages: 'build',
 			assets: 'build',
 			fallback: '200.html'
